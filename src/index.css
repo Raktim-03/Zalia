@@ -1,0 +1,2224 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import "tailwindcss";
+
+/* ==========================================
+   GLOBAL STYLES
+========================================== */
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #fff4f1;
+  background: #160f19;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  background: #160f19;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: #160f19;
+  overflow-x: clip;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: #160f19;
+  background: #f4adbd;
+}
+
+/* ==========================================
+   BACKGROUND EFFECTS
+========================================== */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+.ambient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+.ambient-one {
+  width: 340px;
+  height: 340px;
+  top: 8%;
+  left: -130px;
+  background: #a43d65;
+}
+
+.ambient-two {
+  width: 360px;
+  height: 360px;
+  right: -160px;
+  top: 35%;
+  background: #613a72;
+}
+
+.petal-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(145deg, #f7b7c4, #b45d7c);
+  opacity: 0;
+  filter: drop-shadow(0 0 5px #f7b7c42b);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.65;
+  }
+
+  85% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate3d(90px, 110vh, 0) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.45;
+    box-shadow: 0 0 5px 2px #ffd78a55;
+  }
+
+  to {
+    opacity: 1;
+    box-shadow: 0 0 10px 4px #ffd78aa8;
+  }
+}
+
+/* ==========================================
+   HEADER AND NAVIGATION
+========================================== */
+
+.site-header {
+  gap: 18px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  color: #f6b6c3;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.site-header nav {
+  color: #c9bbc6;
+  font-size: 12px;
+}
+
+.site-header nav a {
+  transition: color 0.2s ease;
+}
+
+.site-header nav a:hover {
+  color: #f4adbd;
+}
+
+.music-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  flex-shrink: 0;
+  border: 1px solid #f5c2cf3b;
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #f7dfe5;
+  background: #ffffff08;
+  font-size: 11px;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.music-control:hover,
+.music-control.is-playing {
+  border-color: #f4adbd8a;
+  background: #f4adbd12;
+}
+
+.music-control:hover {
+  transform: translateY(-1px);
+}
+
+.music-control.is-playing svg {
+  color: #f4adbd;
+}
+
+/* ==========================================
+   HERO AND TYPOGRAPHY
+========================================== */
+
+.hero {
+  isolation: isolate;
+}
+
+.orb {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #f6a9b91f,
+    #f6a9b906 65%,
+    transparent 66%
+  );
+  box-shadow: 0 0 55px #ed8da52a;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: -9px;
+  border: 1px solid #f6a9b934;
+  border-radius: 50%;
+  animation: orbit 16s linear infinite;
+}
+
+.orb-sparkle {
+  position: absolute;
+  top: 0;
+  right: -10px;
+  color: #f8c8d1;
+}
+
+.eyebrow {
+  color: #e6a7b6;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.8;
+  letter-spacing: 0.27em;
+  overflow-wrap: anywhere;
+}
+
+.hero-title,
+.section-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.hero-title {
+  max-width: 100%;
+  margin: 20px 0 18px;
+  font-size: clamp(3.2rem, 9vw, 6.8rem);
+  line-height: 1.03;
+  overflow-wrap: anywhere;
+}
+
+.hero-title em,
+.section-title em {
+  color: #f4adbd;
+  font-weight: 400;
+}
+
+.hero-copy {
+  max-width: 100%;
+  color: #c9bbc6;
+  font-size: clamp(13px, 1.7vw, 15px);
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.surprise-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  max-width: 100%;
+  margin-top: 28px;
+  border: 1px solid #f7c5ce65;
+  border-radius: 999px;
+  padding: 14px 22px;
+  color: #281722;
+  background: linear-gradient(120deg, #f9cbd1, #e99caf);
+  box-shadow: 0 8px 35px #ed8da522;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.surprise-button:hover {
+  box-shadow: 0 10px 42px #ed8da54a;
+}
+
+.tiny-hint {
+  margin-top: 19px;
+  color: #8e7d8c;
+  font-size: 11px;
+}
+
+.reveal-copy {
+  width: 100%;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 25px;
+  color: #a58b9b;
+}
+
+/* ==========================================
+   SOLO PHOTO WALL
+========================================== */
+
+.solo-section {
+  position: relative;
+  padding: 92px 24px 110px;
+  overflow: hidden;
+}
+
+.solo-heading {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 700px);
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.section-title {
+  max-width: 100%;
+  margin: 13px 0 20px;
+  font-size: clamp(2.2rem, 6vw, 3.7rem);
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.section-subtitle {
+  max-width: 100%;
+  color: #c9bbc6;
+  font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.memory-wall {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  padding: 76px clamp(18px, 4vw, 48px) 36px;
+  border: 1px solid #f5c2cf24;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at 50% 0%, #9c53652b, transparent 62%),
+    linear-gradient(145deg, #35202c, #211521 65%, #291a28);
+  box-shadow: 0 25px 80px #00000025;
+}
+
+.memory-wall::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  z-index: -1;
+  border: 1px solid #f5c2cf13;
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.fairy-lights {
+  position: absolute;
+  top: 0;
+  left: 3%;
+  right: 3%;
+  display: flex;
+  height: 43px;
+  align-items: flex-start;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.fairy-lights::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  border-top: 1px solid #eacba35e;
+  border-radius: 50% 50% 0 0;
+}
+
+.fairy-lights span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 7px;
+  height: 10px;
+  margin-top: 8px;
+  border-radius: 50% 50% 45% 45%;
+  background: #ffe6b0;
+  box-shadow:
+    0 0 7px 3px #ffd78a8a,
+    0 0 20px 5px #ffcb7b30;
+  animation: twinkle 2.4s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.13s);
+}
+
+.wall-vine {
+  position: absolute;
+  z-index: 0;
+  color: #e7a1b4;
+  opacity: 0.72;
+  pointer-events: none;
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.8;
+  writing-mode: vertical-rl;
+  text-shadow: 0 0 16px #f4adbd24;
+}
+
+.vine-left {
+  top: 35%;
+  left: 9px;
+  transform: rotate(12deg);
+}
+
+.vine-right {
+  right: 9px;
+  bottom: 17%;
+  transform: rotate(-12deg);
+}
+
+.solo-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 38px 26px;
+  min-width: 0;
+}
+
+.solo-frame {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: 9px 9px 34px;
+  background: #fff7f0;
+  box-shadow: 0 10px 28px #00000045;
+  transform-origin: center center;
+  transition: box-shadow 0.3s ease;
+}
+
+.solo-frame:nth-child(4n + 1) {
+  margin-top: 7px;
+}
+
+.solo-frame:nth-child(4n + 2) {
+  margin-top: 24px;
+}
+
+.solo-frame:nth-child(4n + 3) {
+  margin-top: 2px;
+}
+
+.solo-frame:nth-child(4n) {
+  margin-top: 18px;
+}
+
+.solo-frame:hover {
+  z-index: 4;
+  box-shadow: 0 18px 35px #00000055;
+}
+
+.frame-pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  z-index: 3;
+  width: 13px;
+  height: 13px;
+  border: 2px solid #f8d9d8;
+  border-radius: 50%;
+  background: #b45d7c;
+  box-shadow: 0 2px 5px #00000030;
+  transform: translateX(-50%);
+}
+
+.photo-image-wrap {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: #382331;
+}
+
+.photo-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #382331;
+}
+
+.photo-placeholder {
+  display: flex;
+  min-width: 0;
+  min-height: 180px;
+  aspect-ratio: 3 / 4;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px;
+  color: #f4adbd;
+  background: #382331;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.photo-placeholder span {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 13px;
+}
+
+.photo-placeholder small {
+  color: #c9bbc6;
+  font-size: 10px;
+}
+
+.solo-frame figcaption {
+  margin-top: 10px;
+  color: #604654;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(10px, 1.15vw, 13px);
+  font-style: italic;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.frame-heart {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  color: #c77791;
+}
+
+.wall-message {
+  position: relative;
+  z-index: 1;
+  margin: 42px auto 0;
+  color: #d5b9c8;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.8;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   COUPLE PHOTO STACK
+   Static overlapping Polaroids
+========================================== */
+
+.couple-section {
+  position: relative;
+  padding: 100px 24px 120px;
+  overflow: visible;
+}
+
+.couple-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(30px, 7vw, 100px);
+  width: min(100%, 1050px);
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.couple-intro {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.couple-intro .section-title {
+  margin-top: 18px;
+}
+
+.couple-intro .section-subtitle {
+  margin-top: 24px;
+}
+
+.carousel-area {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* All four Polaroids occupy one stack area. */
+.polaroid-stage {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 510px;
+  min-width: 0;
+  height: 500px;
+  min-height: 0;
+  margin: 0 auto;
+  overflow: visible;
+  isolation: isolate;
+  perspective: none;
+  touch-action: auto;
+}
+
+/* Shared Polaroid frame */
+.couple-polaroid {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+
+  width: min(68%, 300px);
+  max-width: 80%;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 10px 10px 43px;
+
+  border: 1px solid #4c3541;
+  border-radius: 3px;
+  background: #fff8f0;
+  box-shadow: 0 20px 55px #00000050;
+  color: #624352;
+
+  transform-origin: center center;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+  will-change: auto;
+}
+
+/* Layering order: back to front */
+.couple-polaroid:nth-child(1) {
+  z-index: 1;
+  transform: translate(-50%, -50%) rotate(-10deg) !important;
+}
+
+.couple-polaroid:nth-child(2) {
+  z-index: 2;
+  transform: translate(-50%, -50%) rotate(7deg) !important;
+}
+
+.couple-polaroid:nth-child(3) {
+  z-index: 3;
+  transform: translate(-50%, -50%) rotate(-4deg) !important;
+}
+
+.couple-polaroid:nth-child(4) {
+  z-index: 4;
+  transform: translate(-50%, -50%) rotate(2deg) !important;
+}
+
+.couple-polaroid:focus-visible {
+  outline: 2px solid #f4adbd;
+  outline-offset: 4px;
+}
+
+.couple-polaroid .photo-image-wrap {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: #382331;
+}
+
+/* Couple images are contained instead of cropped. */
+.couple-polaroid .photo-image,
+.couple-polaroid .photo-placeholder {
+  display: block;
+  width: 100%;
+  height: 300px;
+  min-height: 0;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #382331;
+  pointer-events: none;
+}
+
+.couple-polaroid .photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px;
+  color: #f4adbd;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.couple-caption {
+  margin: 10px 2px 0;
+  color: #624352;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.couple-date {
+  display: block;
+  margin-top: 4px;
+  color: #997888;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* No carousel controls or swipe hints */
+.carousel-controls,
+.round-control,
+.carousel-dots,
+.carousel-dot,
+.carousel-counter,
+.swipe-hint {
+  display: none !important;
+}
+
+/* ==========================================
+   BIRTHDAY NOTE AND FOOTER
+========================================== */
+
+.note-section {
+  background: linear-gradient(
+    180deg,
+    #160f1900,
+    #25151f 18%,
+    #25151f 82%,
+    #160f1900
+  );
+}
+
+.note-card {
+  position: relative;
+  width: 100%;
+  padding: clamp(28px, 6vw, 62px);
+  border: 1px solid #f5c2cf22;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fff8f108, #f2b4c008);
+  box-shadow: 0 30px 100px #00000018;
+  text-align: center;
+}
+
+.note-star {
+  display: block;
+  margin: 0 auto 18px;
+  color: #f4adbd;
+}
+
+.note-copy {
+  max-width: 490px;
+  margin: 0 auto;
+  color: #c9bbc6;
+  font-size: 14px;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.signature {
+  margin-top: 28px;
+  color: #f4adbd;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 19px;
+  font-style: italic;
+}
+
+.heart-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 27px;
+  padding: 8px 0;
+  border: 0;
+  color: #f2bac6;
+  background: none;
+  font-size: 12px;
+}
+
+.footer-line {
+  color: #8e7d8c;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+.music-control:focus-visible,
+.surprise-button:focus-visible,
+.text-button:focus-visible {
+  outline: 2px solid #f4adbd;
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   TABLETS AND SMALL LAPTOPS
+========================================== */
+
+@media (max-width: 900px) {
+  .solo-section {
+    padding: 76px 20px 85px;
+  }
+
+  .memory-wall {
+    padding: 62px 26px 30px;
+  }
+
+  .solo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px 20px;
+  }
+
+  .solo-frame:nth-child(n) {
+    margin-top: 0;
+  }
+
+  .solo-frame:nth-child(3n + 2) {
+    margin-top: 14px;
+  }
+
+  .couple-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+    width: min(100%, 650px);
+  }
+
+  .couple-intro {
+    width: 100%;
+    text-align: center;
+  }
+
+  .couple-intro .section-title br,
+  .couple-intro .section-subtitle br {
+    display: none;
+  }
+
+  .couple-intro .section-subtitle {
+    margin-top: 12px;
+  }
+
+  .polaroid-stage {
+    height: 460px;
+  }
+
+  .couple-polaroid {
+    width: min(62%, 280px);
+  }
+
+  .couple-polaroid .photo-image,
+  .couple-polaroid .photo-placeholder {
+    height: 275px;
+  }
+}
+
+/* ==========================================
+   PHONES
+========================================== */
+
+@media (max-width: 640px) {
+  /* Header */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 12px !important;
+  }
+
+  .site-header nav {
+    display: none !important;
+  }
+
+  .brand {
+    gap: 6px;
+    min-width: 0;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .brand svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  .music-control {
+    gap: 5px;
+    max-width: 145px;
+    min-width: 0;
+    padding: 8px 9px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .music-control span {
+    display: block;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 74svh !important;
+    padding: 30px 16px 70px !important;
+  }
+
+  .orb {
+    width: 64px;
+    height: 64px;
+  }
+
+  .hero-title {
+    margin: 18px 0 15px;
+    font-size: clamp(2.25rem, 9.5vw, 3.7rem);
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: 440px;
+    margin-inline: auto;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .hero-copy br {
+    display: none !important;
+  }
+
+  .surprise-button {
+    margin-top: 22px;
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+
+  .tiny-hint {
+    font-size: 10px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .scroll-cue {
+    bottom: 20px;
+  }
+
+  /* Solo photo wall */
+  .solo-section {
+    padding: 58px 12px 68px !important;
+  }
+
+  .solo-heading {
+    width: 100%;
+    margin: 0 auto 28px;
+    padding: 0 4px;
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 7.5vw, 2.7rem);
+    line-height: 1.18;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .memory-wall {
+    width: 100%;
+    padding: 50px 12px 24px;
+    border-radius: 9px;
+  }
+
+  .memory-wall::before {
+    inset: 7px;
+  }
+
+  .fairy-lights {
+    left: 4%;
+    right: 4%;
+  }
+
+  .fairy-lights span {
+    width: 5px;
+    height: 8px;
+  }
+
+  .solo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 21px 12px;
+    width: 100%;
+  }
+
+  .solo-frame,
+  .solo-frame:nth-child(n) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-top: 0;
+    padding: 6px 6px 26px;
+  }
+
+  .solo-frame figcaption {
+    margin-top: 8px;
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .frame-pin {
+    width: 10px;
+    height: 10px;
+    top: -5px;
+  }
+
+  .frame-heart {
+    right: 6px;
+    bottom: 7px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .photo-image-wrap {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .solo-frame .photo-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .photo-placeholder {
+    min-width: 0;
+    min-height: 0;
+    padding: 8px;
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .photo-placeholder span {
+    font-size: 11px;
+  }
+
+  .photo-placeholder small {
+    font-size: 8px;
+  }
+
+  .wall-vine {
+    font-size: 18px;
+    opacity: 0.4;
+  }
+
+  .wall-message {
+    margin-top: 23px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  /* Static couple photo stack */
+  .couple-section {
+    padding: 60px 14px 72px !important;
+    overflow: visible;
+  }
+
+  .couple-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .couple-intro {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .couple-intro .section-title {
+    margin: 12px 0;
+  }
+
+  .couple-intro .section-subtitle {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .carousel-area {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .polaroid-stage {
+    display: block;
+    width: 100%;
+    height: 390px;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .couple-polaroid {
+    width: min(65vw, 235px);
+    max-width: 78%;
+    padding: 7px 7px 35px;
+  }
+
+  .couple-polaroid .photo-image,
+  .couple-polaroid .photo-placeholder {
+    width: 100%;
+    height: clamp(190px, 55vw, 225px);
+    min-height: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .couple-caption {
+    margin-top: 7px;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .couple-date {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+
+  .carousel-controls,
+  .round-control,
+  .carousel-dots,
+  .carousel-dot,
+  .carousel-counter,
+  .swipe-hint {
+    display: none !important;
+  }
+
+  /* Birthday note */
+  .note-section {
+    padding: 52px 13px !important;
+  }
+
+  .note-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 28px 19px;
+  }
+
+  .note-card .section-title {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  .note-copy {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .signature {
+    margin-top: 22px;
+    font-size: 17px;
+  }
+
+  .footer-line {
+    font-size: 10px;
+  }
+}
+
+/* ==========================================
+   EXTRA-SMALL PHONES
+========================================== */
+
+@media (max-width: 375px) {
+  .site-header {
+    padding: 12px 9px !important;
+    gap: 6px;
+  }
+
+  .brand {
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .music-control {
+    max-width: 125px;
+    gap: 4px;
+    padding: 7px;
+    font-size: 9px;
+  }
+
+  .music-control span {
+    max-width: 75px;
+  }
+
+  .hero {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  .hero-title {
+    font-size: clamp(2.1rem, 10.3vw, 2.65rem);
+  }
+
+  .hero-copy {
+    font-size: 12px;
+  }
+
+  .solo-section {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+
+  .memory-wall {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  .solo-grid {
+    gap: 17px 8px;
+  }
+
+  .solo-frame,
+  .solo-frame:nth-child(n) {
+    padding: 5px 5px 23px;
+  }
+
+  .solo-frame figcaption {
+    font-size: 9px;
+  }
+
+  .wall-vine {
+    display: none;
+  }
+
+  .couple-section {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .polaroid-stage {
+    height: 345px;
+  }
+
+  .couple-polaroid {
+    width: min(65vw, 205px);
+    max-width: 78%;
+    padding: 6px 6px 32px;
+  }
+
+  .couple-polaroid .photo-image,
+  .couple-polaroid .photo-placeholder {
+    height: 185px;
+  }
+
+  .couple-caption {
+    font-size: 9px;
+  }
+
+  .note-card {
+    padding: 24px 14px;
+  }
+}
+
+/* ==========================================
+   LANDSCAPE PHONES
+========================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 100svh !important;
+    padding-top: 32px !important;
+    padding-bottom: 55px !important;
+  }
+
+  .orb {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    margin: 12px 0;
+  }
+
+  .polaroid-stage {
+    height: 360px;
+  }
+}
+
+/* ==========================================
+   REDUCED-MOTION ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ==========================================
+   OUR STORY — EDITORIAL MEMORY JOURNAL
+========================================== */
+
+.story-section {
+  position: relative;
+  isolation: isolate;
+  padding: 110px 24px 120px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 20%,
+      #65334b25,
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #160f19 0%,
+      #21141f 48%,
+      #1a101b 100%
+    );
+}
+
+.story-container {
+  width: min(100%, 960px);
+  margin: 0 auto;
+}
+
+/* Heading */
+
+.story-heading {
+  max-width: 680px;
+  margin: 0 auto 75px;
+  text-align: center;
+}
+
+.story-kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  color: #e6a7b6;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+
+.story-kicker-line {
+  width: 30px;
+  height: 1px;
+  background: #e6a7b680;
+}
+
+.story-title {
+  margin: 26px 0 20px;
+  color: #fff4f1;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(3.2rem, 7vw, 5.8rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+}
+
+.story-title em {
+  color: #f4adbd;
+  font-weight: 400;
+}
+
+.story-description {
+  max-width: 480px;
+  margin: 0 auto;
+  color: #c9bbc6;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.story-heart-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  color: #f4adbd;
+}
+
+.story-heart-divider span {
+  width: 45px;
+  height: 1px;
+  background: #f4adbd45;
+}
+
+/* Timeline layout */
+
+.story-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+}
+
+.story-timeline::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #e6a7b64d 10%,
+    #e6a7b64d 90%,
+    transparent
+  );
+  transform: translateX(-50%);
+}
+
+.story-memory {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.story-memory-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border: 1px solid #f4adbd65;
+  border-radius: 50%;
+  color: #f4adbd;
+  background: #21141f;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 13px;
+  transform: translate(-50%, -50%);
+}
+
+.story-memory-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.88fr);
+  align-items: center;
+  gap: 35px;
+  width: calc(50% - 38px);
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid #f5c2cf20;
+  border-radius: 5px;
+  background: linear-gradient(
+    145deg,
+    #fff8f108,
+    #f2b4c005
+  );
+  box-shadow: 0 18px 55px #00000018;
+}
+
+.story-memory:nth-child(odd) .story-memory-card {
+  margin-right: auto;
+}
+
+.story-memory:nth-child(even) .story-memory-card {
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+  margin-left: auto;
+}
+
+.story-memory:nth-child(even) .story-photo-frame {
+  order: 2;
+}
+
+.story-memory:nth-child(even) .story-memory-copy {
+  order: 1;
+}
+
+/* Photo treatment */
+
+.story-photo-frame {
+  position: relative;
+  min-width: 0;
+  padding: 7px 7px 28px;
+  border: 1px solid #e8d8d5;
+  background: #fff8f0;
+  box-shadow: 0 12px 30px #00000030;
+  transform: rotate(-2deg);
+  transition: transform 0.35s ease;
+}
+
+.story-memory:nth-child(even) .story-photo-frame {
+  transform: rotate(2deg);
+}
+
+.story-memory-card:hover .story-photo-frame {
+  transform: rotate(0deg) translateY(-3px);
+}
+
+.story-photo-frame .photo-image-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: #382331;
+}
+
+.story-photo-frame .photo-image {
+  width: 100%;
+  height: 235px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #382331;
+}
+
+.story-photo-frame .photo-placeholder {
+  width: 100%;
+  height: 235px;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.story-photo-index {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  left: 0;
+  color: #997888;
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  text-align: center;
+}
+
+/* Memory text */
+
+.story-memory-copy {
+  min-width: 0;
+  padding: 7px 0;
+}
+
+.story-memory-label {
+  color: #e6a7b6;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1.8;
+}
+
+.story-memory-copy h3 {
+  margin: 12px 0;
+  color: #fff4f1;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.story-memory-text {
+  margin: 0;
+  color: #b9a8b5;
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.story-memory-date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  color: #f0aebd;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+/* Closing message */
+
+.story-ending {
+  max-width: 610px;
+  margin: 100px auto 0;
+  padding: 45px 30px;
+  border-top: 1px solid #f5c2cf24;
+  border-bottom: 1px solid #f5c2cf24;
+  text-align: center;
+}
+
+.story-ending-sparkle {
+  display: block;
+  margin-bottom: 18px;
+  color: #f4adbd;
+  font-size: 27px;
+}
+
+.story-ending-eyebrow {
+  color: #e6a7b6;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.8;
+}
+
+.story-ending h3 {
+  margin: 22px 0;
+  color: #fff4f1;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.story-ending h3 em {
+  color: #f4adbd;
+  font-weight: 400;
+}
+
+.story-ending-note {
+  max-width: 420px;
+  margin: 0 auto;
+  color: #c9bbc6;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.story-ending-hearts {
+  margin-top: 25px;
+  color: #f4adbd;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+}
+
+/* ==========================================
+   TABLETS
+========================================== */
+
+@media (max-width: 900px) {
+  .story-section {
+    padding: 85px 24px 95px;
+  }
+
+  .story-heading {
+    margin-bottom: 60px;
+  }
+
+  .story-memory-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    width: calc(50% - 35px);
+    padding: 13px;
+  }
+
+  .story-memory:nth-child(even) .story-memory-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .story-memory:nth-child(even) .story-photo-frame,
+  .story-memory:nth-child(even) .story-memory-copy {
+    order: initial;
+  }
+
+  .story-photo-frame .photo-image,
+  .story-photo-frame .photo-placeholder {
+    height: 260px;
+  }
+
+  .story-memory-copy {
+    padding: 4px 3px 8px;
+  }
+
+  .story-memory-copy h3 {
+    font-size: 1.45rem;
+  }
+
+  .story-timeline {
+    gap: 38px;
+  }
+}
+
+/* ==========================================
+   PHONES
+========================================== */
+
+@media (max-width: 640px) {
+  .story-section {
+    padding: 65px 15px 75px;
+  }
+
+  .story-heading {
+    margin-bottom: 45px;
+  }
+
+  .story-kicker {
+    gap: 8px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
+  }
+
+  .story-kicker-line {
+    width: 20px;
+  }
+
+  .story-title {
+    margin: 22px 0 17px;
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    line-height: 1.08;
+  }
+
+  .story-description {
+    max-width: 350px;
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .story-heart-divider {
+    margin-top: 23px;
+  }
+
+  .story-timeline {
+    gap: 27px;
+  }
+
+  .story-timeline::before {
+    left: 17px;
+  }
+
+  .story-memory-marker {
+    top: 25px;
+    left: 17px;
+    width: 35px;
+    height: 35px;
+    font-size: 11px;
+    transform: translate(-50%, 0);
+  }
+
+  .story-memory-card,
+  .story-memory:nth-child(even) .story-memory-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    width: calc(100% - 48px);
+    margin-left: 48px;
+    padding: 12px;
+  }
+
+  .story-memory:nth-child(even) .story-photo-frame,
+  .story-memory:nth-child(even) .story-memory-copy {
+    order: initial;
+  }
+
+  .story-photo-frame {
+    width: 100%;
+    max-width: 100%;
+    padding: 7px 7px 28px;
+  }
+
+  .story-photo-frame .photo-image,
+  .story-photo-frame .photo-placeholder {
+    width: 100%;
+    height: clamp(210px, 65vw, 300px);
+    min-height: 0;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .story-memory-copy {
+    padding: 5px 4px 8px;
+  }
+
+  .story-memory-label {
+    font-size: 8px;
+  }
+
+  .story-memory-copy h3 {
+    margin: 9px 0;
+    font-size: 1.5rem;
+  }
+
+  .story-memory-text {
+    font-size: 11px;
+  }
+
+  .story-memory-date {
+    margin-top: 13px;
+  }
+
+  .story-ending {
+    margin-top: 65px;
+    padding: 35px 8px;
+  }
+
+  .story-ending h3 {
+    font-size: clamp(1.75rem, 7.8vw, 2.4rem);
+  }
+
+  .story-ending-note {
+    font-size: 11px;
+  }
+}
+
+/* Extra-small phones */
+
+@media (max-width: 375px) {
+  .story-section {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .story-memory-card,
+  .story-memory:nth-child(even) .story-memory-card {
+    width: calc(100% - 43px);
+    margin-left: 43px;
+    padding: 9px;
+  }
+
+  .story-timeline::before {
+    left: 14px;
+  }
+
+  .story-memory-marker {
+    left: 14px;
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .story-photo-frame .photo-image,
+  .story-photo-frame .photo-placeholder {
+    height: 200px;
+  }
+
+  .story-memory-copy h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE SAFETY OVERRIDES
+   Additive only — preserves the existing design
+========================================== */
+
+/* Prevent accidental horizontal overflow without changing the visual theme. */
+html,
+body,
+#root {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+a,
+p,
+h1,
+h2,
+h3,
+figcaption,
+span {
+  overflow-wrap: anywhere;
+}
+
+/* Keep common page sections and grid/flex children shrinkable. */
+.hero,
+.site-header,
+.solo-section,
+.solo-heading,
+.memory-wall,
+.solo-grid,
+.solo-frame,
+.couple-section,
+.couple-layout,
+.couple-intro,
+.carousel-area,
+.polaroid-stage,
+.couple-polaroid,
+.note-section,
+.note-card,
+.story-section,
+.story-container,
+.story-heading,
+.story-timeline,
+.story-memory,
+.story-memory-card,
+.story-photo-frame,
+.story-memory-copy,
+.story-ending {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Medium screens: retain the existing layouts while preventing cramped columns. */
+@media (min-width: 641px) and (max-width: 1100px) {
+  .site-header {
+    flex-wrap: wrap;
+  }
+
+  .solo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .couple-layout {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(24px, 4vw, 54px);
+  }
+
+  .polaroid-stage {
+    width: 100%;
+    height: clamp(360px, 48vw, 460px);
+  }
+
+  .couple-polaroid {
+    width: min(68%, 280px);
+  }
+
+  .couple-polaroid .photo-image,
+  .couple-polaroid .photo-placeholder {
+    height: clamp(220px, 28vw, 275px);
+  }
+
+  .story-memory-card {
+    gap: clamp(14px, 2.5vw, 28px);
+  }
+
+  .story-photo-frame .photo-image,
+  .story-photo-frame .photo-placeholder {
+    height: clamp(210px, 25vw, 260px);
+  }
+}
+
+/* Phones: avoid overflow from long text, images, and fixed-width visual elements. */
+@media (max-width: 640px) {
+  .site-header {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .brand,
+  .music-control {
+    flex-shrink: 1;
+  }
+
+  .hero > *,
+  .solo-heading > *,
+  .couple-intro > *,
+  .story-heading > *,
+  .story-memory-copy > *,
+  .note-card > * {
+    max-width: 100%;
+  }
+
+  .hero-title,
+  .section-title,
+  .section-subtitle,
+  .story-title,
+  .story-description,
+  .story-memory-copy h3,
+  .story-memory-text,
+  .story-ending h3,
+  .story-ending-note,
+  .note-copy {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .solo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .solo-frame,
+  .story-memory-card,
+  .story-photo-frame,
+  .note-card {
+    min-width: 0;
+  }
+
+  .couple-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .polaroid-stage {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .couple-polaroid {
+    max-width: calc(100% - 24px);
+  }
+
+  .story-memory-card,
+  .story-memory:nth-child(even) .story-memory-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .story-photo-frame .photo-image,
+  .story-photo-frame .photo-placeholder {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .story-ending {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Extra-small phones: ensure the header and cards still fit narrow viewports. */
+@media (max-width: 375px) {
+  .site-header {
+    gap: 5px;
+  }
+
+  .brand {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .music-control {
+    min-width: 0;
+    max-width: 46%;
+  }
+
+  .solo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .couple-polaroid {
+    width: min(65vw, 205px);
+  }
+
+  .story-memory-card,
+  .story-memory:nth-child(even) .story-memory-card {
+    max-width: calc(100% - 43px);
+  }
+}
+
+/* Landscape phones: keep the hero and photo stack within the available height. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-header {
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .polaroid-stage {
+    height: min(360px, 75vh);
+  }
+}
+
+/* Respect reduced-motion preferences while retaining the original appearance. */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==========================================
+   FIX: MOBILE CONTENT SHIFT / HORIZONTAL CLIPPING
+   Preserves existing colours, fonts and design
+========================================== */
+
+@media (max-width: 640px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: clip;
+  }
+
+  #root {
+    position: relative;
+    left: auto;
+    right: auto;
+  }
+
+  /* Keep the final story section and footer inside the viewport. */
+  .story-section,
+  .note-section,
+  footer {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+  }
+
+  /* Prevent the note card from extending beyond its parent. */
+  .note-section > *,
+  .note-card {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .note-card {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center note content without changing its typography. */
+  .note-card .section-title,
+  .note-card .note-copy,
+  .note-card .signature,
+  .note-card .note-star,
+  .note-card .heart-row {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Ensure the story ending stays within the viewport. */
+  .story-container,
+  .story-ending {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  /* Stop wide children from forcing the page beyond the screen. */
+  .story-memory-card,
+  .story-photo-frame,
+  .story-memory-copy,
+  .note-card > * {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+}
